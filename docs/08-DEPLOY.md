@@ -8,8 +8,8 @@ Postgres = the whole product.
 `render.yaml` declares a free web service + a free managed Postgres and wires
 `DATABASE_URL` automatically. From the repo on GitHub:
 
-1. Open **https://render.com/deploy?repo=<this-repo-url>** (or New → Blueprint →
-   pick the repo).
+1. Open **https://render.com/deploy?repo=https://github.com/elton-bot/nessy**
+   (or in Render: New → Blueprint → pick the repo).
 2. Click **Apply**. Render provisions Postgres, builds (`npm install && npm run
    build`), and starts (`npm start`).
 3. On first boot the server runs the migration + seeds the demo household, so the

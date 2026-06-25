@@ -1,8 +1,16 @@
 # Nessy — Your household, organized
 
-A mobile-first **Household ERP** prototype: one place to run a home's inventory,
-groceries, shopping, tasks, and maintenance — where an action in any module flows
-through to the dashboard and the rest of the app.
+A mobile-first **Household ERP**: one place to run a home's inventory, groceries,
+shopping, tasks, and maintenance — where an action in any module flows through to
+the dashboard and every family member's device.
+
+## Deploy (one click)
+
+[![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/elton-bot/nessy)
+
+Click → **Apply**. Render provisions Postgres + the web service, runs the
+migration, and seeds a demo household. Log in as any member with PIN **1234**.
+Details in [docs/08-DEPLOY.md](docs/08-DEPLOY.md).
 
 This repository was built end-to-end in six steps; each has a document in `docs/`:
 
