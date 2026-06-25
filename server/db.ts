@@ -63,7 +63,17 @@ const DEMO_PIN = '1234'
 
 export async function migrate() {
   const sql = readFileSync(join(__dirname, 'schema.sql'), 'utf8')
-  await pool.query(sql)
+  // Serialize migration across overlapping instances (Render runs old+new during
+  // a deploy; the RLS DDL takes AccessExclusiveLock and two concurrent runs
+  // deadlock). A session advisory lock lets exactly one instance migrate at a time.
+  const client = await pool.connect()
+  try {
+    await client.query('SELECT pg_advisory_lock($1)', [727274]) // arbitrary constant key
+    await client.query(sql)
+  } finally {
+    await client.query('SELECT pg_advisory_unlock($1)', [727274]).catch(() => {})
+    client.release()
+  }
 }
 
 export async function seedDemo() {

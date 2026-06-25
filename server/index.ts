@@ -170,6 +170,9 @@ app.get('/api/state/stream', requireAuth, (req, res) => {
     'Content-Type': 'text/event-stream',
     'Cache-Control': 'no-cache, no-transform',
     Connection: 'keep-alive',
+    // Disable proxy buffering (Render/nginx) — without this, SSE events are
+    // buffered and never reach the client, which looks like "not syncing".
+    'X-Accel-Buffering': 'no',
   })
   res.flushHeaders?.()
   res.write('retry: 3000\n\n')
