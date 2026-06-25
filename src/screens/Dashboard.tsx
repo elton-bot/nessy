@@ -1,6 +1,7 @@
 import { useNavigate } from 'react-router-dom'
 import { useHousehold } from '../store/HouseholdStore'
 import { Icon, Avatar, CheckBox } from '../ui/components'
+import { SyncBar, ActivityCard } from '../ui/sync-ui'
 import {
   selectTodayTasks, selectLowStock, selectShoppingCount,
   selectMaintenanceDueCount, selectUpcomingMaintenance, maintState, daysUntil,
@@ -35,6 +36,9 @@ export function Dashboard() {
       </header>
 
       <div className="content">
+        {/* Multi-user sync: status + who am I (acts as this family member) */}
+        <SyncBar />
+
         {/* Announcement (R1.8) */}
         <div className="announce">
           <Icon.bell size={18} />
@@ -111,6 +115,9 @@ export function Dashboard() {
             ))}
           </div>
         )}
+
+        {/* Live multi-device household activity feed */}
+        <ActivityCard />
 
         {/* Quick actions (R1.7) */}
         <div className="section-label">Quick actions</div>

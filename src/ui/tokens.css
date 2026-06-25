@@ -152,6 +152,25 @@ button { font-family: inherit; cursor: pointer; }
 @keyframes fade { from { opacity: 0 } to { opacity: 1 } }
 @keyframes slideup { from { transform: translateY(100%) } to { transform: translateY(0) } }
 
+/* sync bar */
+.syncbar { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin: 0 2px 12px; }
+.syncchip { display: flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 600; color: var(--ink-2); }
+.dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+.dot.synced { background: var(--green); }
+.dot.connecting { background: var(--amber); }
+.dot.offline { background: var(--ink-3); }
+.memberselect { display: flex; align-items: center; gap: 7px; background: var(--surface); border: 1px solid var(--line); border-radius: var(--r-pill); padding: 4px 6px 4px 10px; }
+.memberselect span { font-size: 12px; font-weight: 600; color: var(--ink-2); }
+.memberselect select { border: none; background: transparent; font-family: inherit; font-size: 13px; font-weight: 700; color: var(--brand-700); padding: 2px 2px; }
+.memberselect select:focus { outline: none; }
+
+/* activity feed */
+.activity-row { display: flex; align-items: center; gap: 10px; padding: 7px 0; border-bottom: 1px solid var(--surface-2); }
+.activity-row:last-child { border-bottom: none; }
+.activity-row .txt { font-size: 13px; }
+.activity-row .who { font-weight: 700; }
+.activity-row .when { font-size: 11px; color: var(--ink-3); margin-left: auto; white-space: nowrap; }
+
 .empty { text-align: center; color: var(--ink-3); font-size: 13px; padding: 24px 0; }
 .strike { text-decoration: line-through; color: var(--ink-3); }
 .fade-done { opacity: .55; }

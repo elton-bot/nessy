@@ -14,22 +14,27 @@ This repository was built end-to-end in six steps; each has a document in `docs/
 | 4. Build | this app (`src/`) |
 | 5. QA report | [docs/05-QA.md](docs/05-QA.md) |
 | 6. Mobile simulation | [docs/06-SIMULATION.md](docs/06-SIMULATION.md) |
+| +. Multi-user sync backend | [docs/07-SYNC.md](docs/07-SYNC.md) |
 
 ## Run
 
 ```bash
 npm install
-npm run dev      # http://localhost:5180/
+npm run server   # http://localhost:5181  authoritative shared state
+npm run dev      # http://localhost:5180  the app (proxies /api → 5181)
 ```
 
-Use a mobile viewport (~390×844). Reset the demo data anytime from **More →
-Reset demo data**.
+Use a mobile viewport (~390×844). Switch the acting family member from the
+dashboard header; changes sync across devices sharing the household. Reset the
+demo data anytime from **More → Reset demo data**.
 
 ## Stack
 React 18 + TypeScript + Vite, React Router, a single reducer-backed
-`HouseholdStore` with derived selectors for the cross-module flows, localStorage
-persistence, and a hand-built design-token UI. No backend — all data is local
-(privacy by design).
+`HouseholdStore` with derived selectors for the cross-module flows. The reducer
+is a **pure shared module** run identically on the client and on an Express sync
+server, so a household stays consistent across every member's device. localStorage
+provides an offline cache; an optimistic-dispatch + polling client keeps devices
+live. See [docs/07-SYNC.md](docs/07-SYNC.md).
 
 ## Scope
 Phase-1 core modules: **Dashboard, Inventory, Grocery/Pantry, Shopping, Tasks,
