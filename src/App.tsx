@@ -1,5 +1,7 @@
 import { NavLink, Route, Routes } from 'react-router-dom'
 import { Icon } from './ui/components'
+import { useHousehold } from './store/HouseholdStore'
+import { Login } from './screens/Login'
 import { Dashboard } from './screens/Dashboard'
 import { Inventory } from './screens/Inventory'
 import { Grocery } from './screens/Grocery'
@@ -40,6 +42,15 @@ function TabBar() {
 }
 
 export function App() {
+  const { me, authLoading } = useHousehold()
+
+  if (authLoading) {
+    return <div className="shell"><StatusBar /><div className="content" style={{ display: 'grid', placeItems: 'center' }}><div className="empty">Loading…</div></div></div>
+  }
+  if (!me) {
+    return <div className="shell"><StatusBar /><Login /></div>
+  }
+
   return (
     <div className="shell">
       <StatusBar />
@@ -59,7 +70,6 @@ export function App() {
 
 /* "More" hub → Grocery + Maintenance + reset */
 import { useNavigate } from 'react-router-dom'
-import { useHousehold } from './store/HouseholdStore'
 function More() {
   const nav = useNavigate()
   const { dispatch } = useHousehold()

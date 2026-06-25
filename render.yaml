@@ -1,0 +1,21 @@
+# Render Blueprint — one click provisions Postgres + the Nessy web service.
+# https://render.com/deploy  (Render reads this file from the repo root)
+databases:
+  - name: nessy-db
+    plan: free
+
+services:
+  - type: web
+    name: nessy
+    runtime: node
+    plan: free
+    buildCommand: npm install && npm run build
+    startCommand: npm start
+    healthCheckPath: /api/health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: DATABASE_URL
+        fromDatabase:
+          name: nessy-db
+          property: connectionString

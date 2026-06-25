@@ -3,6 +3,13 @@
 Turns the single-device prototype into a **shared household**: every family
 member's device sees the same live state.
 
+> **Production version (current):** Postgres-backed with per-household Row-Level
+> Security, PIN auth + session cookies, and realtime push over **SSE driven by
+> Postgres LISTEN/NOTIFY**. The file-store + polling notes below describe the
+> first iteration; the schema and server are in `server/` and deploy per
+> `docs/08-DEPLOY.md`. RLS isolation, auth (401s), and live SSE updates were all
+> verified end-to-end.
+
 ## Design
 - **Shared reducer.** `src/domain/reducer.ts` is pure (no React, no browser APIs)
   so the *identical* ERP logic runs on the client and on the server. The rules

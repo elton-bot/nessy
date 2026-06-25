@@ -6,20 +6,18 @@ import { fetchActivity, type ActivityEntry } from '../store/sync'
 const STATUS_LABEL = { connecting: 'Connecting…', synced: 'Synced', offline: 'Offline' } as const
 
 export function SyncBar() {
-  const { status, actor, setActor, state } = useHousehold()
+  const { status, actor, logout } = useHousehold()
   return (
     <div className="syncbar">
       <div className="syncchip">
         <span className={`dot ${status}`} />
         {STATUS_LABEL[status]} · shared household
       </div>
-      <label className="memberselect">
+      <div className="memberselect">
         <Avatar name={actor} />
-        <span>as</span>
-        <select value={actor} onChange={e => setActor(e.target.value)} aria-label="Acting as">
-          {state.household.members.map(m => <option key={m} value={m}>{m}</option>)}
-        </select>
-      </label>
+        <span>{actor}</span>
+        <button className="logoutbtn" onClick={logout} aria-label="Sign out"><Icon.logout size={15} /></button>
+      </div>
     </div>
   )
 }
