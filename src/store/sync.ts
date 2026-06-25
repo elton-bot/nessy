@@ -5,7 +5,9 @@ export interface Snapshot { version: number; state: HouseholdState }
 export interface Me { householdId: string; member: string }
 export interface ActivityEntry { actor: string; type: string; at: number }
 
-const opts: RequestInit = { credentials: 'include' }
+// no-store so the polling client never reads a cached snapshot (would break
+// cross-device sync behind a CDN/proxy).
+const opts: RequestInit = { credentials: 'include', cache: 'no-store' }
 
 async function jsonOrNull<T>(p: Promise<Response>): Promise<T | null> {
   try {

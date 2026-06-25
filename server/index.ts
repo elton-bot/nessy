@@ -21,6 +21,10 @@ const app = express()
 app.use(express.json({ limit: '2mb' }))
 app.use(cookieParser())
 
+// API responses must never be cached — otherwise a proxy/browser can serve a
+// stale snapshot to the polling client and changes never cross devices.
+app.use('/api', (_req, res, next) => { res.set('Cache-Control', 'no-store'); next() })
+
 app.get('/api/health', async (_req, res) => {
   try { await pool.query('SELECT 1'); res.json({ ok: true }) }
   catch { res.status(503).json({ ok: false }) }
