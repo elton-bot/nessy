@@ -13,34 +13,33 @@ building it. Two tools: the **landing page** (`landing/index.html`) and the
 home type, **whether they employ staff**, tier preference, and **willingness to
 pay** — not just an email.
 
-### Make lead-capture live (pick ONE — needed before you post)
-The form posts to `WAITLIST_ENDPOINT` (top of the `<script>` in the HTML).
-It's empty by default (saves to the browser only). Set it to one of:
+### It's already hosted (GitHub Pages)
+Live at **https://elton-bot.github.io/nessy/** — published from the `gh-pages`
+branch (contents of `landing/`). To update it after editing `landing/`:
+```bash
+git subtree split --prefix landing -b gh-pages-tmp
+git push -f origin gh-pages-tmp:gh-pages && git branch -D gh-pages-tmp
+```
+The OG image (`og-image.png`, 1200×630) is in place, so the Facebook link preview
+looks premium.
 
-- **Tally (easiest, free, ~5 min):** create a form at tally.so, or just use Tally
-  as the destination — simplest is to point the button at a Tally form. Or use
-  **Formspree**: create a form, paste its endpoint URL.
-- **Google Apps Script (free, your Google acct):** a 10-line web app that appends
-  to a Google Sheet; paste its `/exec` URL.
-- **Nessy backend (integrated):** once the app is deployed, set it to
-  `"/api/waitlist"` (endpoint already built; read leads at
-  `/api/waitlist?key=<WAITLIST_KEY>`).
+### ⚠️ Make lead-capture live BEFORE posting (one 30-second step)
+The form uses **Web3Forms** (free, no account). Right now `WEB3FORMS_KEY` in the
+page is a placeholder, so submissions are saved only in the visitor's browser —
+**they do NOT reach you.** To go live:
+1. Go to **https://web3forms.com**, enter your email, copy the **Access Key** it
+   gives you (each signup then gets emailed to you).
+2. Paste it into `WEB3FORMS_KEY` near the bottom of `landing/index.html`.
+3. Re-publish (the two commands above).
 
-> For posting *this week*, Tally/Formspree is the no-friction choice. The Nessy
-> backend option is there for when the app is live.
-
-### Host it (pick ONE)
-- **Netlify Drop / Cloudflare Pages / GitHub Pages** — drag the `landing/` folder
-  in; free; gives a public URL in minutes. (GitHub Pages: it's already in your
-  repo under `landing/`.)
-- Or serve from the deployed Nessy app.
+*(Alternatives if you prefer leads in a DB: point the fetch at the Nessy backend
+`/api/waitlist` once the app is deployed — endpoint + table already built; read
+them at `/api/waitlist?key=<WAITLIST_KEY>`.)*
 
 ### Before posting — quick checklist
-- [ ] `WAITLIST_ENDPOINT` set and a test submission lands in your sheet/DB.
-- [ ] Add an `og-image.png` (1200×630) next to the HTML so the Facebook preview
-      looks premium (a clean Nessy logo + tagline on the sand background). Without
-      it, FB shows a bare link.
-- [ ] Open the public URL on your phone — it should look right (it's mobile-first).
+- [ ] **Web3Forms key set** and a test submission actually arrives in your email.
+- [ ] Open https://elton-bot.github.io/nessy/ on your phone — looks right (mobile-first).
+- [ ] Paste the link in a private chat first to confirm the FB-style preview image shows.
 
 ---
 
