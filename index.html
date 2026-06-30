@@ -8,9 +8,10 @@
 
 <!-- Facebook / Open Graph (controls the link preview when shared) -->
 <meta property="og:type" content="website" />
+<meta property="og:url" content="https://elton-bot.github.io/nessy/" />
 <meta property="og:title" content="Nessy — run your whole household, and your staff, from one app" />
 <meta property="og:description" content="From a studio apartment to a full estate. Inventory, groceries, chores, maintenance, and household-staff management — finally in one place. Get founding-member early access." />
-<meta property="og:image" content="og-image.png" />
+<meta property="og:image" content="https://elton-bot.github.io/nessy/og-image.png" />
 <meta property="og:image:width" content="1200" />
 <meta property="og:image:height" content="630" />
 <meta name="twitter:card" content="summary_large_image" />
@@ -259,16 +260,18 @@
 </div>
 
 <script>
-  // ── Capture endpoint ──────────────────────────────────────────────
-  // Paste a Tally/Formspree/Google-Apps-Script URL OR your Nessy backend
-  // "/api/waitlist". If left empty, submissions are kept in this browser
-  // (localStorage) so the page still works for a demo — set this before
-  // you post publicly so you actually capture leads.
-  const WAITLIST_ENDPOINT = "";
+  // ── Lead capture ──────────────────────────────────────────────────
+  // Uses Web3Forms (free, no account): go to https://web3forms.com, enter
+  // your email, and it gives you an Access Key — every signup is emailed to
+  // you. Paste the key below, redeploy, and the form is live.
+  // (Until a real key is set, submissions are kept only in this browser so
+  //  the page still demos — they are NOT sent anywhere.)
+  const WEB3FORMS_KEY = "PASTE_YOUR_WEB3FORMS_ACCESS_KEY";
 
   const form = document.getElementById('waitlistForm');
   const thanks = document.getElementById('thanks');
   const btn = document.getElementById('submitBtn');
+  const keyReady = WEB3FORMS_KEY && !WEB3FORMS_KEY.startsWith('PASTE_');
 
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
@@ -277,16 +280,21 @@
     data.ts = new Date().toISOString();
     data.ref = location.search || '';
     try {
-      if (WAITLIST_ENDPOINT) {
-        await fetch(WAITLIST_ENDPOINT, {
+      if (keyReady) {
+        await fetch('https://api.web3forms.com/submit', {
           method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(data),
+          headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+          body: JSON.stringify({
+            access_key: WEB3FORMS_KEY,
+            subject: 'New Nessy waitlist signup',
+            from_name: 'Nessy waitlist',
+            ...data,
+          }),
         });
       } else {
         const all = JSON.parse(localStorage.getItem('nessy.waitlist') || '[]');
         all.push(data); localStorage.setItem('nessy.waitlist', JSON.stringify(all));
-        console.log('Waitlist (local, no endpoint set):', data);
+        console.log('Waitlist (local only — set WEB3FORMS_KEY to capture):', data);
       }
       form.style.display = 'none';
       thanks.style.display = 'block';
