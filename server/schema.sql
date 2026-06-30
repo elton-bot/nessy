@@ -41,6 +41,19 @@ CREATE TABLE IF NOT EXISTS events (
 );
 CREATE INDEX IF NOT EXISTS events_household_idx ON events (household_id, id DESC);
 
+-- Pre-signup validation leads from the landing page (not household-scoped).
+CREATE TABLE IF NOT EXISTS waitlist (
+  id           bigserial PRIMARY KEY,
+  email        text NOT NULL,
+  home         text,
+  staff        text,
+  tier         text,
+  willingness  text,
+  pain         text,
+  ref          text,
+  created_at   timestamptz NOT NULL DEFAULT now()
+);
+
 -- ---------- Row-Level Security ----------
 -- household-scoped tables are filtered to current_setting('app.household_id').
 -- FORCE so even the table owner (the app role) is subject to the policy.

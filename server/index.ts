@@ -30,6 +30,29 @@ app.get('/api/health', async (_req, res) => {
   catch { res.status(503).json({ ok: false }) }
 })
 
+// ---------- waitlist (landing-page validation capture) ----------
+app.post('/api/waitlist', async (req, res) => {
+  const { email, home, staff, tier, willingness, pain, ref } = req.body || {}
+  if (!email || typeof email !== 'string') return res.status(400).json({ error: 'email required' })
+  try {
+    await pool.query(
+      `INSERT INTO waitlist (email, home, staff, tier, willingness, pain, ref)
+       VALUES ($1,$2,$3,$4,$5,$6,$7)`,
+      [email, home || null, staff || null, tier || null, willingness || null, pain || null, ref || null],
+    )
+    res.json({ ok: true })
+  } catch (e) { console.error(e); res.status(500).json({ error: 'failed' }) }
+})
+
+// Guarded export so you can read leads: /api/waitlist?key=<WAITLIST_KEY>
+app.get('/api/waitlist', async (req, res) => {
+  if (!process.env.WAITLIST_KEY || req.query.key !== process.env.WAITLIST_KEY) {
+    return res.status(401).json({ error: 'unauthorized' })
+  }
+  const r = await pool.query('SELECT * FROM waitlist ORDER BY id DESC LIMIT 1000')
+  res.json({ count: r.rowCount, leads: r.rows })
+})
+
 // ---------- auth ----------
 interface Auth { householdId: string; member: string }
 
