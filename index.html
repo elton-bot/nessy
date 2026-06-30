@@ -1,0 +1,301 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+<title>Nessy — Your household, organized. Even your staff.</title>
+<meta name="description" content="Nessy is the home operating system for modern households — from a studio to a full estate. Manage inventory, groceries, tasks, maintenance, and your household staff in one app. Join the early-access waitlist." />
+
+<!-- Facebook / Open Graph (controls the link preview when shared) -->
+<meta property="og:type" content="website" />
+<meta property="og:title" content="Nessy — run your whole household, and your staff, from one app" />
+<meta property="og:description" content="From a studio apartment to a full estate. Inventory, groceries, chores, maintenance, and household-staff management — finally in one place. Get founding-member early access." />
+<meta property="og:image" content="og-image.png" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta name="twitter:card" content="summary_large_image" />
+
+<style>
+  :root{
+    --bg:#F6F4EF; --surface:#fff; --surface-2:#F0EEE8; --ink:#1F2421; --ink-2:#5B635E; --ink-3:#9AA09B;
+    --line:#E6E3DB; --brand:#2F7E76; --brand-700:#245E58; --brand-50:#E4F0EE;
+    --amber:#D9952A; --amber-50:#FAF1DF; --gold:#B08D2D;
+    --r:16px; --r-lg:22px; --shadow:0 10px 34px rgba(31,36,33,.08),0 1px 2px rgba(31,36,33,.05);
+    --font:-apple-system,BlinkMacSystemFont,"SF Pro Text",Inter,system-ui,sans-serif;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{font-family:var(--font);color:var(--ink);background:var(--bg);line-height:1.5;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:560px;margin:0 auto;padding:0 20px}
+  h1,h2,h3{line-height:1.15;margin:0}
+  p{margin:0}
+  .btn{display:inline-block;background:var(--brand);color:#fff;font-weight:700;font-size:16px;text-decoration:none;
+    padding:15px 24px;border-radius:999px;border:none;cursor:pointer;text-align:center;transition:transform .12s,background .12s}
+  .btn:active{transform:scale(.98);background:var(--brand-700)}
+  .btn.block{display:block;width:100%}
+
+  /* hero */
+  header{padding:26px 0 8px}
+  .logo{display:flex;align-items:center;gap:10px;font-weight:800;font-size:18px}
+  .logo .mark{width:34px;height:34px;border-radius:10px;background:var(--brand);color:#fff;display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:800}
+  .hero{padding:30px 0 14px;text-align:center}
+  .eyebrow{display:inline-block;background:var(--brand-50);color:var(--brand-700);font-size:12.5px;font-weight:700;
+    padding:6px 13px;border-radius:999px;letter-spacing:.3px;margin-bottom:18px}
+  .hero h1{font-size:33px;font-weight:800;letter-spacing:-.5px}
+  .hero h1 em{font-style:normal;color:var(--brand)}
+  .hero p.lead{font-size:17px;color:var(--ink-2);margin:16px auto 24px;max-width:460px}
+  .hero .btn{box-shadow:var(--shadow)}
+  .micro{font-size:12.5px;color:var(--ink-3);margin-top:12px}
+
+  section{padding:26px 0}
+  .kicker{font-size:12px;font-weight:800;letter-spacing:1px;text-transform:uppercase;color:var(--ink-3);text-align:center;margin-bottom:8px}
+  .h2{font-size:24px;font-weight:800;text-align:center;letter-spacing:-.3px}
+  .sub{font-size:15px;color:var(--ink-2);text-align:center;max-width:460px;margin:10px auto 0}
+
+  .pain{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-lg);padding:20px;margin-top:18px}
+  .pain ul{margin:0;padding-left:0;list-style:none}
+  .pain li{display:flex;gap:11px;align-items:flex-start;padding:9px 0;border-bottom:1px solid var(--surface-2);font-size:15px}
+  .pain li:last-child{border-bottom:none}
+  .pain li .d{width:7px;height:7px;border-radius:50%;background:var(--amber);margin-top:7px;flex-shrink:0}
+
+  .feat{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:18px}
+  .card{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:15px;box-shadow:var(--shadow)}
+  .card .ic{width:38px;height:38px;border-radius:11px;background:var(--brand-50);color:var(--brand);display:flex;align-items:center;justify-content:center;font-size:20px;margin-bottom:9px}
+  .card h3{font-size:15px;font-weight:700}
+  .card p{font-size:13px;color:var(--ink-2);margin-top:3px}
+  .card.staff .ic{background:var(--amber-50);color:var(--gold)}
+
+  /* pricing */
+  .tiers{display:flex;flex-direction:column;gap:13px;margin-top:20px}
+  .tier{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-lg);padding:18px 18px}
+  .tier.feat-tier{border:2px solid var(--brand);position:relative}
+  .tier .tag{position:absolute;top:-11px;left:18px;background:var(--brand);color:#fff;font-size:11px;font-weight:800;padding:3px 11px;border-radius:999px;letter-spacing:.4px}
+  .tier .name{font-size:18px;font-weight:800}
+  .tier .price{font-size:15px;color:var(--ink-2);margin:3px 0 10px}
+  .tier .price b{color:var(--ink);font-size:22px}
+  .tier ul{margin:0;padding-left:0;list-style:none}
+  .tier li{font-size:13.5px;padding:5px 0 5px 24px;position:relative;color:var(--ink)}
+  .tier li::before{content:"✓";position:absolute;left:0;color:var(--brand);font-weight:800}
+  .tier .who{font-size:12.5px;color:var(--ink-3);margin-top:10px}
+
+  .privacy{background:var(--brand-50);border:1px solid #C9E2DE;border-radius:var(--r-lg);padding:18px;margin-top:20px;text-align:center}
+  .privacy h3{font-size:16px;color:var(--brand-700)}
+  .privacy p{font-size:13.5px;color:var(--brand-700);margin-top:6px}
+
+  /* form */
+  .form-wrap{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-lg);padding:22px 20px;box-shadow:var(--shadow);margin-top:20px}
+  .field{margin-bottom:14px}
+  .field label{display:block;font-size:13px;font-weight:700;margin-bottom:6px}
+  .field input,.field select,.field textarea{width:100%;border:1px solid var(--line);border-radius:11px;padding:13px 13px;font-size:15px;font-family:inherit;background:#fff;color:var(--ink)}
+  .field input:focus,.field select:focus,.field textarea:focus{outline:none;border-color:var(--brand);box-shadow:0 0 0 3px var(--brand-50)}
+  .seg{display:flex;flex-wrap:wrap;gap:8px}
+  .seg label{flex:1;min-width:46%;border:1.5px solid var(--line);border-radius:11px;padding:11px;text-align:center;font-size:13.5px;font-weight:600;cursor:pointer;display:block;margin:0}
+  .seg input{position:absolute;opacity:0;width:0;height:0}
+  .seg input:checked + span{color:var(--brand-700)}
+  .seg label:has(input:checked){border-color:var(--brand);background:var(--brand-50)}
+  .hint{font-size:11.5px;color:var(--ink-3);margin-top:5px}
+  .thanks{display:none;text-align:center;padding:18px 6px}
+  .thanks .big{font-size:40px}
+  .thanks h3{font-size:20px;margin-top:6px}
+  .thanks p{font-size:14px;color:var(--ink-2);margin-top:8px}
+
+  footer{padding:28px 0 40px;text-align:center;color:var(--ink-3);font-size:12.5px}
+  .divider{height:1px;background:var(--line);margin:6px 0}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <div class="logo"><span class="mark">N</span> Nessy</div>
+  </header>
+
+  <div class="hero">
+    <span class="eyebrow">Early access · founding members</span>
+    <h1>Your household, organized.<br><em>Even your staff.</em></h1>
+    <p class="lead">Nessy is the home operating system for modern households — from a studio apartment to a full estate. Inventory, groceries, chores, maintenance, bills, and your household staff, finally in one app.</p>
+    <a href="#join" class="btn">Get early access →</a>
+    <p class="micro">Free to join the waitlist · founding-member pricing · no spam</p>
+  </div>
+
+  <section>
+    <div class="kicker">The problem</div>
+    <h2 class="h2">Running a home is a full-time operation</h2>
+    <div class="pain">
+      <ul>
+        <li><span class="d"></span> Groceries, supplies, and what’s running low — scattered across notes and memory.</li>
+        <li><span class="d"></span> Maintenance you forget until something breaks: aircon, pool, water tank, pest control.</li>
+        <li><span class="d"></span> Chores and who’s doing what — lost in the family group chat.</li>
+        <li><span class="d"></span> And if you have help — maids, a driver, a nanny — their tasks, attendance, leave, and pay live in a notebook.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section>
+    <div class="kicker">What Nessy does</div>
+    <h2 class="h2">One app for the whole home</h2>
+    <div class="feat">
+      <div class="card"><div class="ic">📦</div><h3>Inventory</h3><p>Linen, kitchen, supplies — know what you own and what’s low.</p></div>
+      <div class="card"><div class="ic">🥦</div><h3>Grocery &amp; pantry</h3><p>Track stock and expiry; auto-build the shopping list.</p></div>
+      <div class="card"><div class="ic">✅</div><h3>Tasks</h3><p>Recurring chores, assigned and tracked — no more nagging.</p></div>
+      <div class="card"><div class="ic">🛠️</div><h3>Maintenance</h3><p>Never miss a service date; keep vendor history.</p></div>
+      <div class="card staff"><div class="ic">🧹</div><h3>Staff &amp; attendance</h3><p>Assign work, clock in/out, leave requests — for homes with help.</p></div>
+      <div class="card staff"><div class="ic">💳</div><h3>Simple payroll</h3><p>Salary, days worked, advances, payslips — all in one place.</p></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="kicker">Pricing</div>
+    <h2 class="h2">A plan for every home</h2>
+    <p class="sub">From living solo to running an estate. Founding-member pricing for early access.</p>
+    <div class="tiers">
+      <div class="tier">
+        <div class="name">Nessy Lite</div>
+        <div class="price"><b>Free</b></div>
+        <ul><li>Grocery &amp; shopping list</li><li>Low-stock reminders</li><li>For 1–2 people</li></ul>
+        <div class="who">Solo living &amp; small starts</div>
+      </div>
+      <div class="tier">
+        <div class="name">Nessy Home</div>
+        <div class="price">from <b>$4</b>/mo</div>
+        <ul><li>Everything in Lite</li><li>Full inventory, tasks, maintenance, bills</li><li>Unlimited family members &amp; sync</li></ul>
+        <div class="who">Small to big families</div>
+      </div>
+      <div class="tier feat-tier">
+        <span class="tag">FOR HOMES WITH STAFF</span>
+        <div class="name">Nessy Estate</div>
+        <div class="price">from <b>$15</b>/mo</div>
+        <ul><li>Everything in Home</li><li>Staff profiles, attendance &amp; clock-in</li><li>Task assignment with photo proof</li><li>Leave requests &amp; simple payroll</li></ul>
+        <div class="who">Estates, villas &amp; staffed households</div>
+      </div>
+    </div>
+    <p class="sub" style="margin-top:14px">Prices are indicative — tell us what’s fair in the form below.</p>
+  </section>
+
+  <section>
+    <div class="privacy">
+      <h3>Private by design</h3>
+      <p>Your household data stays yours. Staff only ever see their own tasks and schedule — <b>never your bills, budgets, or family’s private information.</b></p>
+    </div>
+  </section>
+
+  <section id="join">
+    <div class="kicker">Join</div>
+    <h2 class="h2">Be a founding member</h2>
+    <p class="sub">Get early access and founding-member pricing. Takes 30 seconds — and shapes what we build first.</p>
+
+    <form class="form-wrap" id="waitlistForm">
+      <div class="field">
+        <label for="email">Email *</label>
+        <input id="email" name="email" type="email" required placeholder="you@email.com" />
+      </div>
+
+      <div class="field">
+        <label>What’s your home like? *</label>
+        <div class="seg">
+          <label><input type="radio" name="home" value="solo" required><span>Living solo</span></label>
+          <label><input type="radio" name="home" value="small_family"><span>Small family</span></label>
+          <label><input type="radio" name="home" value="big_family"><span>Big / multi-gen</span></label>
+          <label><input type="radio" name="home" value="estate"><span>Estate w/ staff</span></label>
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="staff">Do you employ household staff?</label>
+        <select id="staff" name="staff">
+          <option value="none">No, none</option>
+          <option value="1">Yes — 1 (e.g. a maid)</option>
+          <option value="2-3">Yes — 2 to 3</option>
+          <option value="4+">Yes — 4 or more</option>
+          <option value="planning">Not yet, but planning to</option>
+        </select>
+        <div class="hint">Maid, driver, nanny, cook, gardener, caregiver…</div>
+      </div>
+
+      <div class="field">
+        <label>Which plan fits you? *</label>
+        <div class="seg">
+          <label><input type="radio" name="tier" value="lite" required><span>Lite (free)</span></label>
+          <label><input type="radio" name="tier" value="home"><span>Home</span></label>
+          <label><input type="radio" name="tier" value="estate"><span>Estate</span></label>
+          <label><input type="radio" name="tier" value="unsure"><span>Not sure yet</span></label>
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="pay">If Nessy Estate saved you the hassle of managing staff, what’s fair per month?</label>
+        <select id="pay" name="willingness">
+          <option value="">Select…</option>
+          <option value="0">I’d only use the free version</option>
+          <option value="<10">Under $10</option>
+          <option value="10-20">$10 – $20</option>
+          <option value="20-35">$20 – $35</option>
+          <option value="35+">$35+</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label for="pain">What’s your biggest household headache right now? (optional)</label>
+        <textarea id="pain" name="pain" rows="2" placeholder="The thing that, if it just worked, you’d gladly pay for."></textarea>
+      </div>
+
+      <button type="submit" class="btn block" id="submitBtn">Join the waitlist →</button>
+      <p class="hint" style="text-align:center;margin-top:10px">We’ll only email you about early access. No spam, ever.</p>
+    </form>
+
+    <div class="form-wrap thanks" id="thanks">
+      <div class="big">🎉</div>
+      <h3>You’re on the list!</h3>
+      <p>Thank you — we’ll be in touch with early access. If you have help at home and 10 minutes to share how you manage it, reply to our email; founding members shape Nessy first.</p>
+    </div>
+  </section>
+
+  <footer>
+    <div class="divider"></div>
+    <p style="margin-top:14px">Nessy — the operating system for the modern home.</p>
+    <p style="margin-top:4px">© 2026 Nessy. Made for households of every size.</p>
+  </footer>
+
+</div>
+
+<script>
+  // ── Capture endpoint ──────────────────────────────────────────────
+  // Paste a Tally/Formspree/Google-Apps-Script URL OR your Nessy backend
+  // "/api/waitlist". If left empty, submissions are kept in this browser
+  // (localStorage) so the page still works for a demo — set this before
+  // you post publicly so you actually capture leads.
+  const WAITLIST_ENDPOINT = "";
+
+  const form = document.getElementById('waitlistForm');
+  const thanks = document.getElementById('thanks');
+  const btn = document.getElementById('submitBtn');
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    btn.disabled = true; btn.textContent = 'Joining…';
+    const data = Object.fromEntries(new FormData(form).entries());
+    data.ts = new Date().toISOString();
+    data.ref = location.search || '';
+    try {
+      if (WAITLIST_ENDPOINT) {
+        await fetch(WAITLIST_ENDPOINT, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data),
+        });
+      } else {
+        const all = JSON.parse(localStorage.getItem('nessy.waitlist') || '[]');
+        all.push(data); localStorage.setItem('nessy.waitlist', JSON.stringify(all));
+        console.log('Waitlist (local, no endpoint set):', data);
+      }
+      form.style.display = 'none';
+      thanks.style.display = 'block';
+      thanks.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    } catch (err) {
+      btn.disabled = false; btn.textContent = 'Join the waitlist →';
+      alert('Something went wrong — please try again.');
+    }
+  });
+</script>
+</body>
+</html>
